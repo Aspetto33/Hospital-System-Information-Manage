@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.jk18_7.sim.login.entity.Logintime" table="logintime" schema="jk18_7">
+        <id name="uId" column="u_id"/>
+        <property name="lTime" column="l_time"/>
+        <property name="lCount" column="l_count"/>
+    </class>
+</hibernate-mapping>

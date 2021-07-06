@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.jk18_7.sim.hospital.entity.Hospital" table="hospital" schema="jk18_7">
+        <id name="hId" column="h_id"/>
+        <property name="deCount" column="de_count"/>
+        <property name="hArea" column="h_area"/>
+        <property name="dCount" column="d_count"/>
+        <property name="hTime" column="h_time"/>
+    </class>
+</hibernate-mapping>

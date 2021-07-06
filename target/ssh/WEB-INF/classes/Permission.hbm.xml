@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.jk18_7.sim.authority.entity.Permission" table="permission" schema="jk18_7">
+        <id name="pId" column="p_id"/>
+        <property name="pName" column="p_name"/>
+        <property name="desc" column="desc_"/>
+        <property name="url" column="url"/>
+    </class>
+</hibernate-mapping>

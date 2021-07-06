@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.jk18_7.sim.login.entity.Users" table="users" schema="jk18_7">
+        <id name="uId" column="u_id">
+            <generator class="native"/>
+        </id>
+        <property name="uName" column="u_name"/>
+        <property name="uPwd" column="u_pwd"/>
+        <property name="uEmail" column="u_email"/>
+        <property name="salt" column="salt"/>
+    </class>
+</hibernate-mapping>

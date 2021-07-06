@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.objectFactory" value="spring" />
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+<!--    &lt;!&ndash; 修改常量管理struts 中的action的工程，这个常量的使用，必须引入 spring和struts的整合包，不然spring无法管理struts2 Action 中的实体类&ndash;&gt;-->
+<!--    <constant name="struts.objectFactory" value="spring" />-->
+<!--    <package name="user" namespace="/" extends="struts-default">-->
+<!--        <action name="user_*" class="com.aspetto.action.UserAction" method="{1}">-->
+<!--            <result name="success">/index.jsp</result>-->
+<!--            <allowed-methods>m1,saveUser</allowed-methods>-->
+<!--        </action>-->
+<!--    </package>-->
+    <!-- 登录、注册、修改密码跳转路径配置        -->
+    <package name="login" extends="struts-default" namespace="/">
+        <action name="LoginAction_*" class="com.jk18_7.sim.login.action.LoginAction" method="{1}">
+            <!-- 登陆成功跳转到主页面         -->
+            <result name="success">/index.jsp</result>
+            <!-- 登陆失败再次跳转到登陆页面           -->
+            <result name="error">/login.jsp</result>
+            <!-- 注册成功跳转到登陆页面           -->
+            <result name="addUser">/login.jsp</result>
+            <!-- 注册失败跳到注册页面         -->
+            <result name="addUserF">/register.jsp</result>
+            <!-- 修改密码成功跳转到登陆页面          -->
+            <result name="updateUpwd">/login.jsp</result>
+            <!-- 修改密码失败跳转到修改到密码页面            -->
+            <result name="updateUpwdF">/updatePwd.jsp</result>
+            <allowed-methods>findUserByUnameAndUpwd,addUser,updateUpwd</allowed-methods>
+        </action>
+        <action name="HospitalAction_*" class="com.jk18_7.sim.hospital.action.HospitalAction" method="{1}">
+            <result name="addHospital">/success.jsp</result>
+            <result name="getHospitals">/listhospital.jsp</result>
+            <result name="deleteHospital">/success.jsp</result>
+            <allowed-methods>addHospital,getHospitals,deleteHospital</allowed-methods>
+        </action>
+        <action name="SystemsAction_*" class="com.jk18_7.sim.systems.action.SystemsAction" method="{1}">
+            <result name="addSystem">/success.jsp</result>
+            <result name="getSystem">/listSystem.jsp</result>
+            <result name="deleteSystem">/success.jsp</result>
+            <allowed-methods>addSystem,getSystem,</allowed-methods>
+        </action>
+    </package>
+
+<!--    &lt;!&ndash; 查看、新增、修改医院信息跳转路径配置    &ndash;&gt;-->
+<!--    <package name="hospital" extends="struts-default" namespace="">-->
+<!--        <action name="HospitalAction_*" class="com.jk18_7.sim.hospital.action.HospitalAction" method="{1}">-->
+<!--            <result name="getHospitals">/</result>-->
+<!--            <result name="addHospital">/</result>-->
+<!--            <result name="updateHospital">/</result>-->
+<!--            <allowed-methods>getHospitals,addHospital,updateHospital</allowed-methods>-->
+<!--        </action>-->
+<!--    </package>-->
+</struts>

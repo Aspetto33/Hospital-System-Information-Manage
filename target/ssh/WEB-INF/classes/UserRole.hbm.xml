@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.jk18_7.sim.authority.entity.UserRole" table="user_role" schema="jk18_7">
+        <id name="id" column="id"/>
+        <property name="uId" column="u_id"/>
+        <property name="rId" column="r_id"/>
+    </class>
+</hibernate-mapping>
