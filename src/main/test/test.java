@@ -1,28 +1,12 @@
-import com.jk18_7.sim.authority.entity.MyUsersMapper;
-import com.jk18_7.sim.hospital.entity.Hospital;
-import com.jk18_7.sim.hospital.service.HospitalService;
+import com.jk18_7.sim.authority.service.RoleService;
 import com.jk18_7.sim.login.entity.Users;
 import com.jk18_7.sim.login.service.LoginService;
-import com.jk18_7.sim.login.tools.JdbcTemplateUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.ByteSource;
-import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import com.jk18_7.sim.login.tools.HibernateUtils;
+import org.hibernate.Session;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Transactional
 public class test {
@@ -118,11 +102,21 @@ public class test {
 //        System.out.println(list.getuEmail()+"电子邮箱");
 //        System.out.println(list.getuPwd()+"密码");
 
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-spring.xml");
-        LoginService loginService = (LoginService) applicationContext.getBean("loginService");
-        String upwd = loginService.UpdateUpwd("qian123","yangqian123","12345678");
-        System.out.println(upwd);
-        Users users = loginService.FindUserByName("qian123");
-        System.out.println(users);
+//
+
+//        HibernateUtils hibernateUtils = new HibernateUtils();
+//        Session session = hibernateUtils.getSession();
+//        if(session == null){
+//            System.out.println("错误");
+//        }else {
+//            System.out.println("success");
+//            hibernateUtils.closeSession();
+//            System.out.println("关闭成功");
+//        }
+//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-spring.xml");
+//        RoleService roleService = (RoleService) applicationContext.getBean("roleService");
+//        roleService.deleteRole(2);
+
+
    }
 }

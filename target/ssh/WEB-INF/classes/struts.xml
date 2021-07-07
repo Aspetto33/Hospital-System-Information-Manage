@@ -32,6 +32,24 @@
             <result name="updateUpwdF">/updatePwd.jsp</result>
             <allowed-methods>findUserByUnameAndUpwd,addUser,updateUpwd</allowed-methods>
         </action>
+        <action name="UserAction_*" class="com.jk18_7.sim.authority.action.UserAction" method="{1}">
+            <result name="listUser">/listuser.jsp</result>
+            <result name="deleteUser">/success.jsp</result>
+            <allowed-methods>listUser,deleteUser</allowed-methods>
+        </action>
+        <action name="RoleAction_*" class="com.jk18_7.sim.authority.action.RoleAction" method="{1}">
+            <result name="listRole">/listrole.jsp</result>
+            <result name="deleteRole">/success.jsp</result>
+            <result name="addRole">/success.jsp</result>
+            <result name="error">/unauthorized.jsp</result>
+            <allowed-methods>listRole,deleteRole,addRole</allowed-methods>
+        </action>
+        <action name="PermissionAction_*" class="com.jk18_7.sim.authority.action.PermissionAction" method="{1}">
+            <result name="listPermission">/listpermission.jsp</result>
+            <result name="deletePermission">/success.jsp</result>
+            <result name="addPermission">/success.jsp</result>
+            <allowed-methods>listPermission,deletePermission,addPermission</allowed-methods>
+        </action>
         <action name="HospitalAction_*" class="com.jk18_7.sim.hospital.action.HospitalAction" method="{1}">
             <result name="addHospital">/success.jsp</result>
             <result name="getHospitals">/listhospital.jsp</result>

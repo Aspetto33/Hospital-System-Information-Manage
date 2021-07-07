@@ -56,6 +56,11 @@ public class LoginServiceImpl implements LoginService {
     public List<Users> getList() {
         return loginDao.getList();
     }
+
+    @Override
+    public void delete(int id) {
+        loginDao.delete(id);
+    }
 //    @Transactional(rollbackFor = {Exception.class,RuntimeException.class})
 //    @Override
 //    public void AddLoginTime(Logintime logintime, Integer uid) {

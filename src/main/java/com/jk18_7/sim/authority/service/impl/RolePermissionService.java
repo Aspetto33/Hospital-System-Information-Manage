@@ -11,17 +11,17 @@ public class RolePermissionService implements com.jk18_7.sim.authority.service.R
    @Resource
    private RolePermissionDao rolePermissionDao;
     @Override
-    public void setPermissions(Role role, long[] pids) {
+    public void setPermissions(Role role, int[] pids) {
         rolePermissionDao.setPermissions(role,pids);
     }
 
     @Override
-    public void deleteByRole(long rid) {
+    public void deleteByRole(int rid) {
         rolePermissionDao.deleteByRole(rid);
     }
 
     @Override
-    public void deleteByPermission(long pid) {
+    public void deleteByPermission(int pid) {
         rolePermissionDao.deleteByPermission(pid);
     }
 }

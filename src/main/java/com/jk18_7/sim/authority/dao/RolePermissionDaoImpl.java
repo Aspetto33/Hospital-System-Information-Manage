@@ -2,7 +2,6 @@ package com.jk18_7.sim.authority.dao;
 
 import com.jk18_7.sim.authority.entity.Role;
 import com.jk18_7.sim.authority.entity.RolePermission;
-import com.jk18_7.sim.authority.entity.UserRole;
 import com.jk18_7.sim.authority.interfaces.RolePermissionDao;
 import com.jk18_7.sim.login.tools.HibernateUtils;
 import org.hibernate.Session;
@@ -16,11 +15,10 @@ import java.util.List;
 
 @Repository("rolePermissionDao")
 public class RolePermissionDaoImpl implements RolePermissionDao {
-    @Resource(name="sessionFactory")
-    private SessionFactory sessionFactory;
     @Override
-    public void setPermissions(Role role, long[] pids) {
-        Session session = sessionFactory.getCurrentSession();
+    public void setPermissions(Role role, int[] pids) {
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from RolePermission where rId=:rid");
         query.setParameter("rid",role.getrId());
@@ -29,7 +27,7 @@ public class RolePermissionDaoImpl implements RolePermissionDao {
             session.delete(rolePermission);
         }
         if(pids !=null){
-           for (long pid:pids){
+           for (int pid:pids){
                RolePermission rolePermission = new RolePermission();
                rolePermission.setpId(pid);
                rolePermission.setrId(role.getrId());
@@ -37,11 +35,13 @@ public class RolePermissionDaoImpl implements RolePermissionDao {
            }
         }
         transaction.commit();
+        hibernateUtils.closeSession();
     }
 
     @Override
-    public void deleteByRole(long rid) {
-        Session session = sessionFactory.getCurrentSession();
+    public void deleteByRole(int rid) {
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from RolePermission where rId=:rid");
         query.setParameter("rid",rid);
@@ -50,11 +50,13 @@ public class RolePermissionDaoImpl implements RolePermissionDao {
             session.delete(rolePermission);
         }
         transaction.commit();
+        hibernateUtils.closeSession();
     }
 
     @Override
-    public void deleteByPermission(long pid) {
-        Session session = sessionFactory.getCurrentSession();
+    public void deleteByPermission(int pid) {
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from RolePermission where pId=:pid");
         query.setParameter("pid",pid);
@@ -63,5 +65,6 @@ public class RolePermissionDaoImpl implements RolePermissionDao {
             session.delete(rolePermission);
         }
         transaction.commit();
+        hibernateUtils.closeSession();
     }
 }

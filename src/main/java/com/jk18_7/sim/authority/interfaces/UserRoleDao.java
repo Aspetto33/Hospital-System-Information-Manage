@@ -3,9 +3,9 @@ package com.jk18_7.sim.authority.interfaces;
 import com.jk18_7.sim.login.entity.Users;
 
 public interface UserRoleDao {
-    void setRoles(Users users, long [] rIds);
+    void setRoles(Users users, int [] rIds);
 
-    void deleteByUser(long uid);
+    void deleteByUser(int uid);
 
-    void deleteByRole(long rid);
+    void deleteByRole(int rid);
 }

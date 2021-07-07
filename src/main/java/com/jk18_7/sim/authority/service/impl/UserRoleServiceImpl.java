@@ -12,17 +12,17 @@ public class UserRoleServiceImpl implements UserRoleService {
     @Resource
     private UserRoleDao userRoleDao;
     @Override
-    public void setRoles(Users users, long[] rIds) {
+    public void setRoles(Users users, int[] rIds) {
         userRoleDao.setRoles(users,rIds);
     }
 
     @Override
-    public void deleteByUser(long uid) {
+    public void deleteByUser(int uid) {
         userRoleDao.deleteByUser(uid);
     }
 
     @Override
-    public void deleteByRole(long rid) {
+    public void deleteByRole(int rid) {
         userRoleDao.deleteByRole(rid);
     }
 }

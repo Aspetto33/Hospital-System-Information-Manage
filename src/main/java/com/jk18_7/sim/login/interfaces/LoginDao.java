@@ -29,4 +29,6 @@ public interface LoginDao {
 
     List<Users> getList();
 
+    public void delete(int id);
+
 }

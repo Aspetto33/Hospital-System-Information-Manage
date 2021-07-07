@@ -25,12 +25,12 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
         permissionDao.delete(id);
     }
 
     @Override
-    public Permission getPermission(long id) {
+    public Permission getPermission(int id) {
         return permissionDao.getPermission(id);
     }
 

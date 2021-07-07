@@ -1,28 +1,22 @@
 package com.jk18_7.sim.login.dao;
 
 import com.jk18_7.sim.authority.entity.MyUsersMapper;
+import com.jk18_7.sim.authority.service.UserRoleService;
 import com.jk18_7.sim.login.entity.Users;
 import com.jk18_7.sim.login.interfaces.LoginDao;
 import com.jk18_7.sim.login.tools.HibernateUtils;
 import com.jk18_7.sim.login.tools.JdbcTemplateUtils;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.subject.Subject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,8 +25,8 @@ public class LoginDaoImpl implements LoginDao {
     //Getting objects by annotation
 //    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-spring.xml");
 //    SessionFactory sessionFactory = (SessionFactory) applicationContext.getBean("sessionFactory");
-    @Resource(name = "sessionFactory")
-    private SessionFactory sessionFactory;
+   @Resource
+   private UserRoleService userRoleService;
     @Override
     public Boolean FindUserByUnameAndUpwd(String uname, String upwd) {
         try{
@@ -126,7 +120,8 @@ public class LoginDaoImpl implements LoginDao {
 
     @Override
     public Users getUser(long uid) {
-        Session session = sessionFactory.openSession();
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         String sql = "from Users where uId=:uid";
         Query query = session.createQuery(sql);
         query.setParameter("uid",uid);
@@ -134,17 +129,31 @@ public class LoginDaoImpl implements LoginDao {
         session.close();
         if(list.size()<=0 || list == null)
             return null;
+        hibernateUtils.closeSession();
         return list.get(0);
     }
 
     @Override
     public List<Users> getList() {
-        Session session = sessionFactory.getCurrentSession();
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Query query = session.createQuery("from Users");
         List list = query.list();
         if(list.size()<=0 || list == null)
             return null;
+        hibernateUtils.closeSession();
         return list;
+
+    }
+    public void delete(int id){
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
+        Transaction transaction = session.beginTransaction();
+        Users users = session.get(Users.class,id);
+        session.delete(users);
+        transaction.commit();
+        hibernateUtils.closeSession();
+        userRoleService.deleteByUser(id);
 
     }
 

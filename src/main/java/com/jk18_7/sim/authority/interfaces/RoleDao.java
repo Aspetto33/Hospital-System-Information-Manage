@@ -12,8 +12,8 @@ public interface RoleDao {
     List<Role> list(Users users);
     List<Role> list();
     void addRole(Role role);
-    void deleteRole(long id);
-    Role getRole(long id);
+    void deleteRole(int id);
+    Role getRole(int id);
     void updateRole(Role role);
 
 }

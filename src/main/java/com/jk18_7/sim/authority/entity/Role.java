@@ -7,17 +7,17 @@ import javax.persistence.Id;
 
 @Entity
 public class Role {
-    private long rId;
+    private int rId;
     private String rName;
     private String desc;
 
     @Id
     @Column(name = "r_id")
-    public long getrId() {
+    public int getrId() {
         return rId;
     }
 
-    public void setrId(long rId) {
+    public void setrId(int rId) {
         this.rId = rId;
     }
 
@@ -57,7 +57,7 @@ public class Role {
 
     @Override
     public int hashCode() {
-        int result = (int) (rId ^ (rId >>> 32));
+        int result = rId;
         result = 31 * result + (rName != null ? rName.hashCode() : 0);
         result = 31 * result + (desc != null ? desc.hashCode() : 0);
         return result;

@@ -24,10 +24,12 @@ public class UserAction extends ActionSupport {
     @Resource
     private UserRoleService userRoleService;
 
+    private int id;
+
     //查询所有用户及其角色并将其展示在页面上
     public String listUser() {
         List<Users> users = loginService.getList();
-        Map<String, Object> actionContext = (Map<String, Object>) ActionContext.getContext();
+        ActionContext actionContext = ActionContext.getContext();
         actionContext.put("users", users);
         Map<Users, List<Role>> user_role = new HashMap<>();
         for (Users users1 : users) {
@@ -40,11 +42,10 @@ public class UserAction extends ActionSupport {
 
     //修改用户信息
     public String editUser() {
-        long uid = users.getuId();
         Map<String, Object> actionContext = (Map<String, Object>) ActionContext.getContext();
         List<Role> roles = roleService.list();
         actionContext.put("roles", roles);
-        Users users = loginService.getUser(uid);
+        Users users = loginService.getUser(id);
         actionContext.put("users", users);
         List<Role> roleList = roleService.list(users);
         actionContext.put("currentRole", roleList);
@@ -80,11 +81,23 @@ public class UserAction extends ActionSupport {
         return "addUser";
     }
 
+    public String deleteUser(){
+        loginService.delete(id);
+        return "deleteUser";
+    }
     public Users getUsers() {
         return users;
     }
 
     public void setUsers(Users users) {
         this.users = users;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

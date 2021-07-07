@@ -40,12 +40,12 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void deleteRole(long id) {
+    public void deleteRole(int id) {
         roleDao.deleteRole(id);
     }
 
     @Override
-    public Role getRole(long id) {
+    public Role getRole(int id) {
         return roleDao.getRole(id);
     }
 

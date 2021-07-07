@@ -8,14 +8,10 @@ import com.opensymphony.xwork2.ModelDriven;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.springframework.context.ApplicationContext;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.Map;
 
 public class LoginAction extends ActionSupport implements ModelDriven<Users> {

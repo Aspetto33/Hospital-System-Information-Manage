@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Users {
-    private long uId;
+    private int uId;
     private String uName;
     private String uPwd;
     private String uEmail;
@@ -15,11 +15,11 @@ public class Users {
 
     @Id
     @Column(name = "u_id")
-    public long getuId() {
+    public int getuId() {
         return uId;
     }
 
-    public void setuId(long uId) {
+    public void setuId(int uId) {
         this.uId = uId;
     }
 
@@ -81,7 +81,7 @@ public class Users {
 
     @Override
     public int hashCode() {
-        int result = (int) (uId ^ (uId >>> 32));
+        int result = uId;
         result = 31 * result + (uName != null ? uName.hashCode() : 0);
         result = 31 * result + (uPwd != null ? uPwd.hashCode() : 0);
         result = 31 * result + (uEmail != null ? uEmail.hashCode() : 0);

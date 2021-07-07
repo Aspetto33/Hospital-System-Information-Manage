@@ -1,6 +1,5 @@
 package com.jk18_7.sim.systems.dao;
 
-import com.jk18_7.sim.login.tools.HibernateUtils;
 import com.jk18_7.sim.login.tools.JdbcTemplateUtils;
 import com.jk18_7.sim.systems.entity.Systems;
 import com.jk18_7.sim.systems.interfaces.SystemsDao;

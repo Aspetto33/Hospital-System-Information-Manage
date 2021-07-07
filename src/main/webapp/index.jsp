@@ -17,5 +17,10 @@
 
     <span class="desc">你好，${subject.principal}，</span>
 <%--    <a href="doLogout.jsp">退出</a><br>--%>
+<a href="UserAction_listUser.action">展示用户信息</a>
+<a href="RoleAction_listRole.action">展示角色信息</a>
+<a href="PermissionAction_listPermission.action">展示权限信息</a>
+<a href="#">财务部门</a>
+<a href="#">药品管理部门</a>
 </body>
 </html>

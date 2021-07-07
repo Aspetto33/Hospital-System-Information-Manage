@@ -15,11 +15,10 @@ import java.util.List;
 
 @Repository("userRoleDao")
 public class UserRoleDaoImpl implements UserRoleDao {
-    @Resource(name="sessionFactory")
-    private SessionFactory sessionFactory;
     @Override
-    public void setRoles(Users users, long[] rIds) {
-        Session session = sessionFactory.getCurrentSession();
+    public void setRoles(Users users, int[] rIds) {
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from UserRole where uId=:uid");
         query.setParameter("uid",users.getuId());
@@ -28,7 +27,7 @@ public class UserRoleDaoImpl implements UserRoleDao {
             session.delete(userRole);
         }
         if(rIds!=null){
-            for(long rid:rIds){
+            for(int rid:rIds){
                 UserRole userRole = new UserRole();
                 userRole.setrId(rid);
                 userRole.setuId(users.getuId());
@@ -36,11 +35,13 @@ public class UserRoleDaoImpl implements UserRoleDao {
             }
         }
         transaction.commit();
+        hibernateUtils.closeSession();
     }
 
     @Override
-    public void deleteByUser(long uid) {
-        Session session = sessionFactory.getCurrentSession();
+    public void deleteByUser(int uid) {
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from UserRole where uId =:uid");
         query.setParameter("uid",uid);
@@ -49,11 +50,13 @@ public class UserRoleDaoImpl implements UserRoleDao {
             session.delete(userRole);
         }
         transaction.commit();
+        hibernateUtils.closeSession();
     }
 
     @Override
-    public void deleteByRole(long rid) {
-        Session session = sessionFactory.getCurrentSession();
+    public void deleteByRole(int rid) {
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
         Query query = session.createQuery("from UserRole where rId=:rid");
         query.setParameter("rid",rid);
@@ -62,5 +65,6 @@ public class UserRoleDaoImpl implements UserRoleDao {
             session.delete(userRole);
         }
         transaction.commit();
+        hibernateUtils.closeSession();
     }
 }

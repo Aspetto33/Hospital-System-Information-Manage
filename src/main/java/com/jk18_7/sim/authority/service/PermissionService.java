@@ -9,8 +9,8 @@ import java.util.Set;
 public interface PermissionService {
     Set<String> listPermissions(String uname);
     void add(Permission permission);
-    void delete(long id);
-    Permission getPermission(long id);
+    void delete(int id);
+    Permission getPermission(int id);
     void update(Permission permission);
     List<Permission> list(Role role);
     Boolean needInterceptor(String requestURI);

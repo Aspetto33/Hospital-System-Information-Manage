@@ -7,18 +7,18 @@ import javax.persistence.Id;
 
 @Entity
 public class Permission {
-    private long pId;
+    private int pId;
     private String pName;
     private String desc;
     private String url;
 
     @Id
     @Column(name = "p_id")
-    public long getpId() {
+    public int getpId() {
         return pId;
     }
 
-    public void setpId(long pId) {
+    public void setpId(int pId) {
         this.pId = pId;
     }
 
@@ -69,7 +69,7 @@ public class Permission {
 
     @Override
     public int hashCode() {
-        int result = (int) (pId ^ (pId >>> 32));
+        int result = pId;
         result = 31 * result + (pName != null ? pName.hashCode() : 0);
         result = 31 * result + (desc != null ? desc.hashCode() : 0);
         result = 31 * result + (url != null ? url.hashCode() : 0);

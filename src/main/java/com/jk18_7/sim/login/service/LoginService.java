@@ -28,4 +28,6 @@ public interface LoginService {
 
     List<Users> getList();
 
+    void delete(int id);
+
 }

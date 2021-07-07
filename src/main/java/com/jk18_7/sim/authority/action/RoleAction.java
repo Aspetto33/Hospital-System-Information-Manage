@@ -22,9 +22,10 @@ public class RoleAction extends ActionSupport {
     private PermissionService permissionService;
 
     private Role role;
+    private int id;
     public String listRole(){
         List<Role> roles = roleService.list();
-        Map<String,Object> actionContext = (Map<String, Object>) ActionContext.getContext();
+        ActionContext actionContext =  ActionContext.getContext();
         actionContext.put("roles",roles);
         Map<Role,List<Permission>> role_permission = new HashMap<>();
         for (Role role:roles){
@@ -35,7 +36,7 @@ public class RoleAction extends ActionSupport {
         return "listRole";
     }
     public String editRole(){
-        long rid = role.getrId();
+        int rid = role.getrId();
         Role role = roleService.getRole(rid);
         Map<String,Object> actionContext = (Map<String, Object>) ActionContext.getContext();
         actionContext.put("role",role);
@@ -49,14 +50,19 @@ public class RoleAction extends ActionSupport {
 //        return "updateRole";
 //    }
     public String addRole(){
-        Role role = new Role();
         roleService.addRole(role);
         return "addRole";
     }
     public String deleteRole(){
-        long rid = role.getrId();
-        roleService.deleteRole(rid);
-        return "deleteRole";
+        try {
+            int rid = role.getrId();
+            roleService.deleteRole(rid);
+            return "deleteRole";
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return "error";
+        }
+
     }
 
     public Role getRole() {
@@ -65,5 +71,13 @@ public class RoleAction extends ActionSupport {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -22,8 +22,6 @@ import java.util.Set;
 public class RoleDaoImpl implements RoleDao {
     @Resource
     private LoginDao loginDao;
-   @Resource(name="sessionFactory")
-   private SessionFactory sessionFactory;
     @Override
     public Set<String> listRoleNames(String uname) {
         Set<String> result = new HashSet<>();
@@ -39,7 +37,7 @@ public class RoleDaoImpl implements RoleDao {
         List<Role> list = new ArrayList<>();
         Users users = loginDao.FindUserByName(uname);
         if(users == null)
-            return list;
+            return null;
         list = list(users);
         return list;
 
@@ -48,7 +46,8 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public List<Role> list(Users users) {
         List<Role> roleList = new ArrayList<>();
-        Session session = sessionFactory.getCurrentSession();
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Query query = session.createQuery("from UserRole where uId=:uid");
         query.setParameter("uid",users.getuId());
         List<UserRole> list = query.list();
@@ -60,48 +59,56 @@ public class RoleDaoImpl implements RoleDao {
                 roleList.add(role);
             }
         }
+        hibernateUtils.closeSession();
         return roleList;
     }
 
     @Override
     public List<Role> list() {
-        Session session = sessionFactory.getCurrentSession();
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Query query = session.createQuery("from Role");
         List list = query.list();
         if(list.size()<=0||list==null)
             return null;
+        hibernateUtils.closeSession();
         return list;
 
     }
 
     @Override
     public void addRole(Role role) {
-        Session session = sessionFactory.getCurrentSession();
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
         session.save(role);
         transaction.commit();
+        hibernateUtils.closeSession();
     }
 
     @Override
-    public void deleteRole(long id) {
-
-        Session session = sessionFactory.getCurrentSession();
+    public void deleteRole(int id) {
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
         Role role = session.get(Role.class,id);
         session.delete(role);
         transaction.commit();
+        hibernateUtils.closeSession();
     }
 
     @Override
-    public Role getRole(long id) {
+    public Role getRole(int id) {
         return null;
     }
 
     @Override
     public void updateRole(Role role) {
-        Session session = sessionFactory.getCurrentSession();
+        HibernateUtils hibernateUtils =new HibernateUtils();
+        Session session = hibernateUtils.getSession();
         Transaction transaction = session.beginTransaction();
         session.update(role);
         transaction.commit();
+        hibernateUtils.closeSession();
     }
 }

@@ -5,37 +5,37 @@ import javax.persistence.*;
 @Entity
 @Table(name = "role_permission", schema = "jk18_7", catalog = "")
 public class RolePermission {
-    private long id;
-    private Long rId;
-    private Long pId;
+    private int id;
+    private Integer rId;
+    private Integer pId;
 
     @Id
     @Column(name = "id")
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
     @Basic
     @Column(name = "r_id")
-    public Long getrId() {
+    public Integer getrId() {
         return rId;
     }
 
-    public void setrId(Long rId) {
+    public void setrId(Integer rId) {
         this.rId = rId;
     }
 
     @Basic
     @Column(name = "p_id")
-    public Long getpId() {
+    public Integer getpId() {
         return pId;
     }
 
-    public void setpId(Long pId) {
+    public void setpId(Integer pId) {
         this.pId = pId;
     }
 
@@ -55,7 +55,7 @@ public class RolePermission {
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id;
         result = 31 * result + (rId != null ? rId.hashCode() : 0);
         result = 31 * result + (pId != null ? pId.hashCode() : 0);
         return result;

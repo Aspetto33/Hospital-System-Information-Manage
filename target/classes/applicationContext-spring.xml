@@ -82,7 +82,6 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.jk18_7.sim.login.entity.Users</value>
-                <value>com.jk18_7.sim.login.entity.Logintime</value>
                 <value>com.jk18_7.sim.authority.entity.Permission</value>
                 <value>com.jk18_7.sim.authority.entity.Role</value>
                 <value>com.jk18_7.sim.authority.entity.RolePermission</value>

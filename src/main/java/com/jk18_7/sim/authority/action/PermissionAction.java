@@ -12,10 +12,11 @@ public class PermissionAction extends ActionSupport {
     @Resource
     private PermissionService permissionService;
     private Permission permission;
+    private int id;
     public String listPermission(){
-        long pid = permission.getpId();
+        int pid = permission.getpId();
         Permission permission = permissionService.getPermission(pid);
-        Map<String,Object> actionContext = (Map<String, Object>) ActionContext.getContext();
+        ActionContext actionContext = ActionContext.getContext();
         actionContext.put("permission",permission);
         return "listPermission";
     }
@@ -30,7 +31,7 @@ public class PermissionAction extends ActionSupport {
         return "addPermission";
     }
     public String deletePermission(){
-        long pid = permission.getpId();
+        int pid = permission.getpId();
         permissionService.delete(pid);
         return "deletePermission";
     }
@@ -41,5 +42,13 @@ public class PermissionAction extends ActionSupport {
 
     public void setPermission(Permission permission) {
         this.permission = permission;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
