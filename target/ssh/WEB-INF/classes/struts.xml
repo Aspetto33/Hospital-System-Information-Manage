@@ -35,20 +35,26 @@
         <action name="UserAction_*" class="com.jk18_7.sim.authority.action.UserAction" method="{1}">
             <result name="listUser">/listuser.jsp</result>
             <result name="deleteUser">/success.jsp</result>
-            <allowed-methods>listUser,deleteUser</allowed-methods>
+            <result name="editUser">/edituser.jsp</result>
+            <result name="updateUser">/listuser.jsp</result>
+            <allowed-methods>listUser,deleteUser,editUser,updateUser</allowed-methods>
         </action>
         <action name="RoleAction_*" class="com.jk18_7.sim.authority.action.RoleAction" method="{1}">
             <result name="listRole">/listrole.jsp</result>
-            <result name="deleteRole">/success.jsp</result>
+<!--            <result name="deleteRole">/success.jsp</result>-->
             <result name="addRole">/success.jsp</result>
             <result name="error">/unauthorized.jsp</result>
-            <allowed-methods>listRole,deleteRole,addRole</allowed-methods>
+            <result name="editRole">/editrole.jsp</result>
+            <result name="updateRole">/listrole.jsp</result>
+            <allowed-methods>listRole,deleteRole,addRole,editRole,updateRole</allowed-methods>
         </action>
         <action name="PermissionAction_*" class="com.jk18_7.sim.authority.action.PermissionAction" method="{1}">
             <result name="listPermission">/listpermission.jsp</result>
             <result name="deletePermission">/success.jsp</result>
             <result name="addPermission">/success.jsp</result>
-            <allowed-methods>listPermission,deletePermission,addPermission</allowed-methods>
+            <result name="editPermission">/editpermission.jsp</result>
+            <result name="updatePermission">/listpermission.jsp</result>
+            <allowed-methods>listPermission,deletePermission,addPermission,editPermission,updatePermission</allowed-methods>
         </action>
         <action name="HospitalAction_*" class="com.jk18_7.sim.hospital.action.HospitalAction" method="{1}">
             <result name="addHospital">/success.jsp</result>
@@ -58,19 +64,9 @@
         </action>
         <action name="SystemsAction_*" class="com.jk18_7.sim.systems.action.SystemsAction" method="{1}">
             <result name="addSystem">/success.jsp</result>
-            <result name="getSystem">/listSystem.jsp</result>
+            <result name="getSystem">/listsystem.jsp</result>
             <result name="deleteSystem">/success.jsp</result>
-            <allowed-methods>addSystem,getSystem,</allowed-methods>
+            <allowed-methods>addSystem,getSystem,deleteSystem</allowed-methods>
         </action>
     </package>
-
-<!--    &lt;!&ndash; 查看、新增、修改医院信息跳转路径配置    &ndash;&gt;-->
-<!--    <package name="hospital" extends="struts-default" namespace="">-->
-<!--        <action name="HospitalAction_*" class="com.jk18_7.sim.hospital.action.HospitalAction" method="{1}">-->
-<!--            <result name="getHospitals">/</result>-->
-<!--            <result name="addHospital">/</result>-->
-<!--            <result name="updateHospital">/</result>-->
-<!--            <allowed-methods>getHospitals,addHospital,updateHospital</allowed-methods>-->
-<!--        </action>-->
-<!--    </package>-->
 </struts>

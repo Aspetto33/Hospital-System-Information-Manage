@@ -35,7 +35,8 @@
                     ${r.rName} <br>
                 </c:forEach>
             </td>
-            <td><a href="UserAction_deleteUser?id=${u.uId}">删除</a></td>
+<%--            <td><a href="UserAction_editUser.action"?id=${u.uId}">编辑 </td>--%>
+            <td><a href="UserAction_deleteUser.action?id=${u.uId}">删除</a></td>
         </tr>
     </c:forEach>
 </table>

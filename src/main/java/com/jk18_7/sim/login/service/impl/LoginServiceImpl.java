@@ -48,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Users getUser(long uid) {
+    public Users getUser(int uid) {
         return loginDao.getUser(uid);
     }
 

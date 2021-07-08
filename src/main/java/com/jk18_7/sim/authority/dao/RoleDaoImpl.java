@@ -3,6 +3,7 @@ package com.jk18_7.sim.authority.dao;
 import com.jk18_7.sim.authority.entity.Role;
 import com.jk18_7.sim.authority.entity.UserRole;
 import com.jk18_7.sim.authority.interfaces.RoleDao;
+import com.jk18_7.sim.authority.interfaces.RolePermissionDao;
 import com.jk18_7.sim.login.entity.Users;
 import com.jk18_7.sim.login.interfaces.LoginDao;
 import com.jk18_7.sim.login.tools.HibernateUtils;
@@ -22,6 +23,10 @@ import java.util.Set;
 public class RoleDaoImpl implements RoleDao {
     @Resource
     private LoginDao loginDao;
+    @Resource
+    private UserRoleDaoImpl userRoleDao;
+    @Resource
+    private RolePermissionDao rolePermissionDao;
     @Override
     public Set<String> listRoleNames(String uname) {
         Set<String> result = new HashSet<>();
@@ -51,28 +56,43 @@ public class RoleDaoImpl implements RoleDao {
         Query query = session.createQuery("from UserRole where uId=:uid");
         query.setParameter("uid",users.getuId());
         List<UserRole> list = query.list();
-        for (UserRole userRole:list){
-            query = session.createQuery("from Role where rId = :rid");
-            query.setParameter("rid",userRole.getrId());
-            List<Role> list1 = query.list();
-            for (Role role:list1){
-                roleList.add(role);
+        try {
+            for (UserRole userRole:list) {
+                query = session.createQuery("from Role where rId = :rid");
+                query.setParameter("rid", userRole.getrId());
+                List<Role> list1 = query.list();
+                for (Role role : list1) {
+                    roleList.add(role);
+                }
             }
+            hibernateUtils.closeSession();
+            return roleList;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
         }
-        hibernateUtils.closeSession();
-        return roleList;
+
     }
 
     @Override
     public List<Role> list() {
-        HibernateUtils hibernateUtils = new HibernateUtils();
-        Session session = hibernateUtils.getSession();
-        Query query = session.createQuery("from Role");
-        List list = query.list();
-        if(list.size()<=0||list==null)
-            return null;
-        hibernateUtils.closeSession();
-        return list;
+        try{
+            HibernateUtils hibernateUtils = new HibernateUtils();
+            Session session = hibernateUtils.getSession();
+            Query query = session.createQuery("from Role");
+            List list = query.list();
+            if(list.size()>0){
+                hibernateUtils.closeSession();
+                return list;
+            }else {
+                //return null;
+                return new ArrayList<Role>();
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            //return null;
+            return new ArrayList<Role>();
+        }
 
     }
 
@@ -93,13 +113,19 @@ public class RoleDaoImpl implements RoleDao {
         Transaction transaction = session.beginTransaction();
         Role role = session.get(Role.class,id);
         session.delete(role);
+        userRoleDao.deleteByRole(id);
+        rolePermissionDao.deleteByRole(id);
         transaction.commit();
         hibernateUtils.closeSession();
     }
 
     @Override
     public Role getRole(int id) {
-        return null;
+        HibernateUtils hibernateUtils = new HibernateUtils();
+        Session session = hibernateUtils.getSession();
+        Role role = session.get(Role.class,id);
+        hibernateUtils.closeSession();
+        return role;
     }
 
     @Override

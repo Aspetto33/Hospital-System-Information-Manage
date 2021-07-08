@@ -21,7 +21,6 @@
         <input type="submit" value="登录">
         <a href="register.jsp">注册</a>
         <a href="updatePwd.jsp">修改密码</a>
-        <a href="HospitalAction_getHospitals.action">查询医院信息</a>
     </form>
 </body>
 </html>

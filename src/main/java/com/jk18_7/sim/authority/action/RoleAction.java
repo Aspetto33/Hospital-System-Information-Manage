@@ -7,6 +7,7 @@ import com.jk18_7.sim.authority.service.RolePermissionService;
 import com.jk18_7.sim.authority.service.RoleService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import org.springframework.context.ApplicationContext;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class RoleAction extends ActionSupport {
 
     private Role role;
     private int id;
+    private int[] pids;
     public String listRole(){
         List<Role> roles = roleService.list();
         ActionContext actionContext =  ActionContext.getContext();
@@ -38,17 +40,19 @@ public class RoleAction extends ActionSupport {
     public String editRole(){
         int rid = role.getrId();
         Role role = roleService.getRole(rid);
-        Map<String,Object> actionContext = (Map<String, Object>) ActionContext.getContext();
+        ActionContext actionContext = ActionContext.getContext();
         actionContext.put("role",role);
+        List<Permission> list = permissionService.list();
+        actionContext.put("ps",list);
         List<Permission> permissionList = permissionService.list(role);
         actionContext.put("currentPermission",permissionList);
         return "editRole";
     }
-//    public String updateRole(long[] pids){
-//        rolePermissionService.setPermissions(role,pids);
-//        roleService.updateRole(role);
-//        return "updateRole";
-//    }
+    public String updateRole(){
+        rolePermissionService.setPermissions(role,pids);
+        roleService.updateRole(role);
+        return "updateRole";
+    }
     public String addRole(){
         roleService.addRole(role);
         return "addRole";
@@ -79,5 +83,13 @@ public class RoleAction extends ActionSupport {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int[] getPids() {
+        return pids;
+    }
+
+    public void setPids(int[] pids) {
+        this.pids = pids;
     }
 }

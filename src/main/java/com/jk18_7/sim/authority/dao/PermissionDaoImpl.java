@@ -66,6 +66,7 @@ public class PermissionDaoImpl implements PermissionDao {
         Transaction transaction = session.beginTransaction();
         Permission permission = session.get(Permission.class,id);
         session.delete(permission);
+        rolePermissionDao.deleteByPermission(id);
         transaction.commit();
         hibernateUtils.closeSession();
     }
@@ -143,6 +144,7 @@ public class PermissionDaoImpl implements PermissionDao {
         Session session = hibernateUtils.getSession();
         Query query = session.createQuery("from Permission ");
         List<Permission> list = query.list();
+        hibernateUtils.closeSession();
         return list;
     }
 }

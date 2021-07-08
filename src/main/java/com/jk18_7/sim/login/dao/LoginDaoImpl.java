@@ -119,7 +119,7 @@ public class LoginDaoImpl implements LoginDao {
     }
 
     @Override
-    public Users getUser(long uid) {
+    public Users getUser(int uid) {
         HibernateUtils hibernateUtils = new HibernateUtils();
         Session session = hibernateUtils.getSession();
         String sql = "from Users where uId=:uid";

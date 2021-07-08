@@ -19,8 +19,6 @@
         <td>权限名称</td>
         <td>权限描述</td>
         <td>权限对应的路径</td>
-        <td>编辑</td>
-        <td>删除</td>
     </tr>
     <c:forEach items="${permission}" var="p">
         <tr>
@@ -28,11 +26,12 @@
             <td>${p.pName}</td>
             <td>${p.desc}</td>
             <td>${p.url}</td>
-            <td><a href="PermissionAction_deletePermission?id=${p.pId}">删除</a></td>
+<%--            <td><a href="PermissionAction_editPermission.action?=${p.pId}"></a></td>--%>
+<%--            <td><a href="PermissionAction_deletePermission?id=${p.pId}">删除</a></td>--%>
         </tr>
     </c:forEach>
 </table>
-<form action="Permission_addPermission.action" method="post">
+<form action="PermissionAction_addPermission.action" method="post">
     权限名称: <input type="text" name="permission.pName"> <br>
     权限描述: <input type="text" name="permission.desc"> <br>
     权限对应的url: <input type="text" name="permission.url"> <br><br>

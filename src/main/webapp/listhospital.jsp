@@ -14,25 +14,37 @@
     <title>Title</title>
 </head>
 <body>
-<script language="JavaScript" type="text/javascript">
-    function deleteInfo(hId){
-        if(confirm("确定要删除该数据吗")){
-            document.hospital.action = "HospitalAction_deleteHospital.action?hId"+hId;
-            document.hospital.submit();
-        }
-    }
-</script>
-<form id = "hospital">
 <table>
+    <tr>
+        <td>id</td>
+        <td>科室数量</td>
+        <td>医院面积</td>
+        <td>医生数量</td>
+        <td>医院建立时间</td>
+        <td>删除</td>
+    </tr>
+
     <c:forEach items="${hospitalList}" var="u">
         <tr>
             <td>${u.hId}</td>
             <td>${u.deCount}</td>
+            <td>${u.hArea}</td>
             <td>${u.dCount}</td>
-            <td><input type="button" onclick="deleteInfo(<s:property value="u.hId"/>)" value="删除"></td>
+            <td>${u.hTime}</td>
+            <d><a href="HospitalAction_deleteHospital.action?id=${u.hId}">删除</a></d>
         </tr>
     </c:forEach>
 </table>
+
+<form action="HospitalAction_addHospital.action" method="post">
+    <table>
+          科室数量:  <input type="text" name="hospital.deCount">
+          医院面积:  <input type="text" name="hospital.hArea">
+          医生数量:  <input type="text" name="hospital.dCount">
+          创建时间:  <input type="text" name="hospital.hTime">
+          <input type="submit" value="提交">
+          <input type="reset" value="取消">
+    </table>
 </form>
 </body>
 </html>

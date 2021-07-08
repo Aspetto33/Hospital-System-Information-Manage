@@ -13,13 +13,18 @@
     <title>login</title>
 </head>
 <body>
-
-
+<c:if test="${empty subject.principal}">
+    <a href="login.jsp">登录</a><br>
+</c:if>
+<c:if test="${!empty subject.principal}">
     <span class="desc">你好，${subject.principal}，</span>
-<%--    <a href="doLogout.jsp">退出</a><br>--%>
+    <a href="logout.action">退出</a><br>
+</c:if>
 <a href="UserAction_listUser.action">展示用户信息</a>
 <a href="RoleAction_listRole.action">展示角色信息</a>
 <a href="PermissionAction_listPermission.action">展示权限信息</a>
+<a href="HospitalAction_getHospitals.action">展示医院信息</a>
+<a href="SystemsAction_getSystem.action">展示系统信息</a>
 <a href="#">财务部门</a>
 <a href="#">药品管理部门</a>
 </body>

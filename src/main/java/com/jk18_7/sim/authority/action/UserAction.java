@@ -26,15 +26,19 @@ public class UserAction extends ActionSupport {
 
     private int id;
 
+    private int []rids;
+
     //查询所有用户及其角色并将其展示在页面上
     public String listUser() {
         List<Users> users = loginService.getList();
         ActionContext actionContext = ActionContext.getContext();
         actionContext.put("users", users);
-        Map<Users, List<Role>> user_role = new HashMap<>();
+        Map<Users, List<Role>> user_role = new HashMap<Users, List<Role>>();
         for (Users users1 : users) {
-            List<Role> roles = roleService.list(users1);
-            user_role.put(users1, roles);
+            if(users1!=null){
+                List<Role> roles = roleService.list(users1);
+                user_role.put(users1, roles);
+            }
         }
         actionContext.put("user_role", user_role);
         return "listUser";
@@ -42,7 +46,7 @@ public class UserAction extends ActionSupport {
 
     //修改用户信息
     public String editUser() {
-        Map<String, Object> actionContext = (Map<String, Object>) ActionContext.getContext();
+        ActionContext actionContext = ActionContext.getContext();
         List<Role> roles = roleService.list();
         actionContext.put("roles", roles);
         Users users = loginService.getUser(id);
@@ -51,22 +55,11 @@ public class UserAction extends ActionSupport {
         actionContext.put("currentRole", roleList);
         return "editUser";
     }
-//    public String updateUser(Users users,long []rids){
-//       userRoleService.setRoles(users,rids);
-//       String password = users.getuPwd();
-//       if(users.getuPwd().length()!=0){
-//           String salt = new SecureRandomNumberGenerator().nextBytes().toString();
-//           int times = 2;
-//           String algorithmName = "md5";
-//           String encodedPassword = new SimpleHash(algorithmName,password,salt,times).toString();
-//           users.setSalt(salt);
-//           users.setuPwd(encodedPassword);
-//       }else {
-//           users.setuPwd(null);
-//       }
-//       loginService.updateUser(users);
-//        return "updateUser";
-//    }
+    public String updateUser(){
+        Users users = loginService.getUser(id);
+       userRoleService.setRoles(users,rids);
+        return "updateUser";
+    }
     public String addUser(){
         Users users = new Users();
         String password = users.getuPwd();
@@ -100,4 +93,38 @@ public class UserAction extends ActionSupport {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int[] getRids() {
+        return rids;
+    }
+
+    public void setRids(int[] rids) {
+        this.rids = rids;
+    }
+
+    public LoginService getLoginService() {
+        return loginService;
+    }
+
+    public void setLoginService(LoginService loginService) {
+        this.loginService = loginService;
+    }
+
+    public RoleService getRoleService() {
+        return roleService;
+    }
+
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
+    }
+
+    public UserRoleService getUserRoleService() {
+        return userRoleService;
+    }
+
+    public void setUserRoleService(UserRoleService userRoleService) {
+        this.userRoleService = userRoleService;
+    }
+
+
 }

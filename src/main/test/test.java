@@ -1,3 +1,4 @@
+import com.jk18_7.sim.authority.entity.Role;
 import com.jk18_7.sim.authority.service.RoleService;
 import com.jk18_7.sim.login.entity.Users;
 import com.jk18_7.sim.login.service.LoginService;
@@ -7,6 +8,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Transactional
 public class test {
@@ -82,7 +85,9 @@ public class test {
 //        System.out.println(list1);
 
 //        ApplicationContext applicationContext1 = new ClassPathXmlApplicationContext("applicationContext-spring.xml");
-//        LoginService loginService = (LoginService) applicationContext1.getBean("loginService");
+
+//        Users users = loginService.getUser(2);
+//        System.out.println(users);
 //        UsernamePasswordToken t = (UsernamePasswordToken) token;
 //        String userName= token.getPrincipal().toString();
 //        //获取数据库中的密码
@@ -113,9 +118,12 @@ public class test {
 //            hibernateUtils.closeSession();
 //            System.out.println("关闭成功");
 //        }
-//        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-spring.xml");
-//        RoleService roleService = (RoleService) applicationContext.getBean("roleService");
-//        roleService.deleteRole(2);
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext-spring.xml");
+        RoleService roleService = (RoleService) applicationContext.getBean("roleService");
+        LoginService loginService = (LoginService) applicationContext.getBean("loginService");
+        Users users = loginService.getUser(3);
+        List<Role> list = roleService.list(users);
+        System.out.println(list);
 
 
    }

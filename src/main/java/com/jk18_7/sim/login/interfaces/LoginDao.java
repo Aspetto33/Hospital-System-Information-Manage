@@ -25,7 +25,7 @@ public interface LoginDao {
 
     void updateUser(Users users);
 
-    Users getUser(long uid);
+    Users getUser(int uid);
 
     List<Users> getList();
 

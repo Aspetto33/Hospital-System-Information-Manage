@@ -12,6 +12,7 @@ public class SystemsAction extends ActionSupport {
     @Resource
     private SystemsService systemsService;
     private Systems systems;
+    private int id;
 
     public String getSystem(){
         List<Systems> systemsList = systemsService.getSystems();
@@ -36,5 +37,13 @@ public class SystemsAction extends ActionSupport {
 
     public void setSystems(Systems systems) {
         this.systems = systems;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

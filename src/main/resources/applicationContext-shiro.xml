@@ -25,19 +25,20 @@
         <!-- 配置shiro的过滤器链 -->
         <property name="filterChainDefinitions">
             <value>
+                /logout.action=logout
+                /=anon
                 /login.jsp=anon
-<!--                /HospitalAction_getHospitals=auth-->
-<!--                /HospitalAction_addHospital=auth-->
-<!--                /HospitalAction_deleteHospital=auth-->
-<!--                /SystemsAction_getSystem=auth-->
-<!--                /SystemsAction_addSystem=auth-->
-<!--                /SystemsAction_deleteSystem=auth-->
+                /LoginAction_findUserByUnameAndUpwd.action=anon
+                /register.jsp=anon
+                /updatePwd.jsp=anon
+                /LoginAction_addUser.action=anon
+                /**=url
             </value>
         </property>
     </bean>
     <!-- 退出过滤器 -->
     <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
-        <property name="redirectUrl" value="/index" />
+        <property name="redirectUrl" value="/" />
     </bean>
     <!-- 会话ID生成器 -->
     <bean id="sessionIdGenerator"

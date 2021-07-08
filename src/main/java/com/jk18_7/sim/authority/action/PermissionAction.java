@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 public class PermissionAction extends ActionSupport {
@@ -14,19 +15,22 @@ public class PermissionAction extends ActionSupport {
     private Permission permission;
     private int id;
     public String listPermission(){
-        int pid = permission.getpId();
-        Permission permission = permissionService.getPermission(pid);
+        List<Permission> permission = permissionService.list();
         ActionContext actionContext = ActionContext.getContext();
         actionContext.put("permission",permission);
         return "listPermission";
     }
+    public String editPermission(){
+        Permission permission = permissionService.getPermission(id);
+        ActionContext actionContext = ActionContext.getContext();
+        actionContext.put("permission",permission);
+        return "editPermission";
+    }
     public String updatePermission(){
-        permission = new Permission();
         permissionService.update(permission);
         return "updatePermission";
     }
     public String addPermission(){
-        Permission permission = new Permission();
         permissionService.add(permission);
         return "addPermission";
     }

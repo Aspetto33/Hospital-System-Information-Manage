@@ -19,8 +19,6 @@
         <td>角色名称</td>
         <td>角色描述</td>
         <td>权限</td>
-        <td>编辑</td>
-        <td>删除</td>
     </tr>
     <c:forEach items="${roles}" var="r">
         <tr>
@@ -32,8 +30,8 @@
                     ${p.pName} <br>
                 </c:forEach>
             </td>
-
-            <td><a href="RoleAction_deleteRole?id=${r.rId}">删除</a></td>
+<%--            <td><a href="RoleAction_editRole.action?id=${r.rId}"></a> </td>--%>
+<%--            <td><a href="RoleAction_deleteRole.action?id=${r.rId}">删除</a></td>--%>
         </tr>
     </c:forEach>
 </table>

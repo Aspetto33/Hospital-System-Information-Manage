@@ -12,7 +12,7 @@ public class HospitalAction extends ActionSupport {
     @Resource
     private HospitalService hospitalService;
     private Hospital hospital;
-    private int hId;
+    private int id;
 
     public String getHospitals(){
         List<Hospital> hospitalList = hospitalService.getHospital();
@@ -25,7 +25,7 @@ public class HospitalAction extends ActionSupport {
         return "addHospital";
     }
     public String deleteHospital(){
-        hospitalService.deleteHospital(hId);
+        hospitalService.deleteHospital(id);
         return "deleteHospital";
     }
     public Hospital getHospital() {
@@ -36,11 +36,11 @@ public class HospitalAction extends ActionSupport {
         this.hospital = hospital;
     }
 
-    public int gethId() {
-        return hId;
+    public int getId() {
+        return id;
     }
 
-    public void sethId(int hId) {
-        this.hId = hId;
+    public void setId(int id) {
+        this.id = id;
     }
 }
